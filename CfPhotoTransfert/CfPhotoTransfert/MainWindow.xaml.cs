@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Configuration;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,15 +24,22 @@ namespace CfPhotoTransfert
     {
         private static readonly string[] _validExtensions = { ".jpg", ".bmp", ".gif", ".png" };
 
+        public string setting = ConfigurationManager.AppSettings["setting1"];
+        public string conn = ConfigurationManager.ConnectionStrings["prod"].ConnectionString;
+
         List<string> _items = new List<string>(); 
         List<string> _distinct = new List<string>();
+
+        List<string> items = new List<string>();
+        List<string> distinct = new List<string>();
+
         int totalImage = 0;
 
         public MainWindow()
         {
             InitializeComponent();
             totalImageTextBox.Text = totalImage.ToString();
-
+                        
         }
 
 
@@ -47,9 +55,11 @@ namespace CfPhotoTransfert
                     {
                         string fname = System.IO.Path.GetFileName(item);
                         _items.Add(fname);
+                        items.Add(item);
                     }
                 }
                 _distinct = _items.Distinct().ToList();
+                distinct = items.Distinct().ToList();
             }
             updateEcran();
         }
@@ -61,12 +71,20 @@ namespace CfPhotoTransfert
                 string fSelected = listPhoto.SelectedItem.ToString();
                 foreach (string item in _distinct)
                 {
-                    if (System.IO.Path.GetFileName(item) == fSelected)
+                    if (item == fSelected)
                     {
                         _distinct.RemoveAll(s => s == item);
                         break;
                     }
                 }
+
+                foreach (string item in distinct)
+                    if (System.IO.Path.GetFileName(item) == fSelected)
+                    {
+                    distinct.RemoveAll(s => s == item);
+                    break;
+                    }
+
                 updateEcran();
             }
             else MessageBox.Show("Veuillez selectionnez un item a supprimé");
@@ -80,9 +98,12 @@ namespace CfPhotoTransfert
         private void updateEcran()
         {
             listPhoto.ItemsSource = null;
+            listPhoto.ItemsSource = _distinct;
+            listBoxFullFile.ItemsSource = null;
+            listBoxFullFile.ItemsSource = distinct;
+
             totalImage = _distinct.Count();
             totalImageTextBox.Text = totalImage.ToString();
-            listPhoto.ItemsSource = _distinct;
         }
 
         public static bool IsImageExtension(string ext)

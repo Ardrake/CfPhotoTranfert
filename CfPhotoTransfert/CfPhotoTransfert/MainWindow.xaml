@@ -7,16 +7,17 @@
         mc:Ignorable="d"
         Title="Transfert de Photo Installation Cabanons Fontaine" Height="357.415" Width="550  ">
     <Grid>
-        <StackPanel Name="ImagePanel" Drop="ImagePanel_drop" HorizontalAlignment="Left" Height="240" Margin="223,44,0,0" VerticalAlignment="Top" Width="201" Background="#FFB0ABAB" AllowDrop="True">
-            <ListBox x:Name="listPhoto" Height="239" />
+        <StackPanel Name="ImagePanel" Drop="ImagePanel_drop" HorizontalAlignment="Left" Height="129" Margin="223,44,0,0" VerticalAlignment="Top" Width="201" Background="#FFB0ABAB" AllowDrop="True">
+            <ListBox x:Name="listPhoto" Height="129" />
         </StackPanel>
         <Label x:Name="label" Content="Déposé les fichiers ici" Height="29" VerticalAlignment="Center" Margin="223,0,118,281" HorizontalAlignment="Center"/>
         <Button x:Name="deleteListItem" Content="Supprimé" HorizontalAlignment="Left" Margin="447,44,0,0" VerticalAlignment="Top" Width="75" Click="button_Click"/>
-        <TextBox x:Name="noProd" HorizontalAlignment="Left" Height="23" Margin="98,44,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="113"/>
+        <TextBox x:Name="noProd" HorizontalAlignment="Left" Height="23" Margin="98,44,0,0" TextWrapping="Wrap" Text="CO-" VerticalAlignment="Top" Width="113"/>
         <Label x:Name="label1" Content="No Prod.:" HorizontalAlignment="Left" Margin="22,41,0,0" VerticalAlignment="Top" Width="71"/>
         <Button x:Name="transfertImages" Content="Transfert" HorizontalAlignment="Left" Margin="98,79,0,0" VerticalAlignment="Top" Width="113" Click="transfertImages_Click"/>
         <TextBox x:Name="totalImageTextBox" HorizontalAlignment="Left" Height="23" Margin="382,289,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" HorizontalContentAlignment="Right" Width="42" IsReadOnly="True"/>
         <Label x:Name="label2" Content="Total:" HorizontalAlignment="Center" Margin="325,289,157,8" VerticalAlignment="Center" Height="23" Width="60"/>
+        <ListBox x:Name="listBoxFullFile" HorizontalAlignment="Left" Height="100" Margin="22,184,0,0" VerticalAlignment="Top" Width="402"/>
 
     </Grid>
 </Window>
