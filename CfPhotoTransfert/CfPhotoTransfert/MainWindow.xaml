@@ -5,19 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CfPhotoTransfert"
         mc:Ignorable="d"
+        ResizeMode="NoResize"
+        SizeToContent="WidthAndHeight"
         Title="Transfert de Photo Installation Cabanons Fontaine" Height="357.415" Width="550  ">
     <Grid>
-        <StackPanel Name="ImagePanel" Drop="ImagePanel_drop" HorizontalAlignment="Left" Height="129" Margin="223,44,0,0" VerticalAlignment="Top" Width="201" Background="#FFB0ABAB" AllowDrop="True">
-            <ListBox x:Name="listPhoto" Height="129" />
+        <StackPanel Name="ImagePanel" Drop="ImagePanel_drop" HorizontalAlignment="Left" Height="240" Margin="223,44,0,0" VerticalAlignment="Top" Width="201" Background="#FFB0ABAB" AllowDrop="True">
+            <ListBox x:Name="listPhoto" Height="240" SelectionChanged="listPhoto_SelectionChanged" />
         </StackPanel>
-        <Label x:Name="label" Content="Déposé les fichiers ici" Height="29" VerticalAlignment="Center" Margin="223,0,118,281" HorizontalAlignment="Center"/>
-        <Button x:Name="deleteListItem" Content="Supprimé" HorizontalAlignment="Left" Margin="447,44,0,0" VerticalAlignment="Top" Width="75" Click="button_Click"/>
-        <TextBox x:Name="noProd" HorizontalAlignment="Left" Height="23" Margin="98,44,0,0" TextWrapping="Wrap" Text="CO-" VerticalAlignment="Top" Width="113"/>
-        <Label x:Name="label1" Content="No Prod.:" HorizontalAlignment="Left" Margin="22,41,0,0" VerticalAlignment="Top" Width="71"/>
-        <Button x:Name="transfertImages" Content="Transfert" HorizontalAlignment="Left" Margin="98,79,0,0" VerticalAlignment="Top" Width="113" Click="transfertImages_Click"/>
-        <TextBox x:Name="totalImageTextBox" HorizontalAlignment="Left" Height="23" Margin="382,289,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" HorizontalContentAlignment="Right" Width="42" IsReadOnly="True"/>
-        <Label x:Name="label2" Content="Total:" HorizontalAlignment="Center" Margin="325,289,157,8" VerticalAlignment="Center" Height="23" Width="60"/>
-        <ListBox x:Name="listBoxFullFile" HorizontalAlignment="Left" Height="100" Margin="22,184,0,0" VerticalAlignment="Top" Width="402"/>
-
+        <Label x:Name="label" Content="Déposé les fichiers ici" Margin="262,8,157,289"/>
+        <Button x:Name="deleteListItem" Content="Supprimé" Margin="447,44,0,0" Click="button_Click" HorizontalAlignment="Left" Width="77" Height="24" VerticalAlignment="Top"/>
+        <TextBox x:Name="noProd" Margin="98,44,331,260" TextWrapping="Wrap" Text="CO-"/>
+        <Label x:Name="label1" Content="No Prod.:" Margin="22,41,449,260"/>
+        <Button x:Name="transfertImages" Content="Transfert" Margin="98,79,0,0" Click="transfertImages_Click" HorizontalAlignment="Left" Width="115" Height="24" VerticalAlignment="Top"/>
+        <TextBox x:Name="totalImageTextBox" Margin="382,289,118,15" TextWrapping="Wrap" Text="" HorizontalContentAlignment="Right" IsReadOnly="True"/>
+        <Label x:Name="label2" Content="Total:" Margin="325,292,157,11"/>
+        <Label x:Name="label3" Content="Prévisualisation &#xD;&#xA;        Image" Margin="65,168,374,108"/>
+        <Border BorderThickness="2" BorderBrush="#FFE0DEDE" Margin="12,112,324,43">
+            <Image x:Name="image" Margin="8"/>
+        </Border>
     </Grid>
 </Window>

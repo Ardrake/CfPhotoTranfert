@@ -4,6 +4,7 @@
 ##[Cc]f[Pp]hoto[Tt]ransfert/
 [Aa]pp.config
 *.config
+*.settings
 
 # User-specific files
 *.suo
