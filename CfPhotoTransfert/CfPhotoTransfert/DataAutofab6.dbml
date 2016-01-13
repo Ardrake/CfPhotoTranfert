@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Autofab" Class="DataAutofab6DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=CABANONS00006V;Initial Catalog=Autofab;User ID=Python" SettingsObjectName="CfPhotoTransfert.Properties.Settings" SettingsPropertyName="AutofabConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.COMMANDE" Member="COMMANDEs">
+    <Type Name="COMMANDE">
+      <Column Name="COSEQ" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CLIENT" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CLIENT_CLCODE" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="CLIENT_CLNOM" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="VENDEUR" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="VENDEUR_VENOM" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ADRLIV" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ADRLIV_ALSOINDE" Type="System.String" DbType="VarChar(60)" CanBeNull="true" />
+      <Column Name="ADRLIV_ALNOM" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ADRLIV_ALADR1" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ADRLIV_ALADR2" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ADRLIV_ALADR3" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ADRLIV_ALADR4" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ADRLIV_ALADR5" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ADRLIV_ALCONTACT" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ADRLIV_ALTEL" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="ADRLIV_ALFAX" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="ADRLIV_ALCELLULAIRE" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="ADRLIV_ALEMAIL" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ADRLIV_AlDelLiv" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ADRLIV_CIE" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ADRLIV_CIE_CODE" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="ADRLIV_CIE_NOM" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="TERRITOIRE" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TERRITOIRE_TTDESC_P" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="TERRITOIRE_TTDESC_S" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="FOURNISSEUR" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="FOURNISSEUR_FOCODE" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="FOURNISSEUR_FONOM" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CONDTRANS" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CONDTRANS_COTCODE" Type="System.String" DbType="VarChar(2)" CanBeNull="true" />
+      <Column Name="CONDTRANS_COTDESC1" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CONDTRANS_COTDESC2" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CONDTRANS_COTDESC3" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="FM_LANGUE" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CODETAXE" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CODETAXE_CTDESC_P" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CODETAXE_CTDESC_S" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CONOTRANS" Type="System.String" DbType="Char(9)" CanBeNull="true" />
+      <Column Name="CONOPO" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="COREQUISDATE" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="COTYPE" Type="System.Char" DbType="Char(1)" CanBeNull="true" />
+      <Column Name="COSOUMDATE" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="COCOMDATE" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="COSTSEQ" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CONOITEMRENDU" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CONOCOMMACOMBA" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="COCOUTTRANSP" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="CONOTE" Type="System.String" DbType="VarChar(7500)" CanBeNull="true" />
+      <Column Name="CLIENT_CLESCOMPTE" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="CLIENT_CLALCSEQ" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CONOTE_EXP" Type="System.String" DbType="VarChar(7500)" CanBeNull="true" />
+      <Column Name="ADRLIV_ALCOMPTETRANS" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="DEVISES" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DEVISES_DEVCODE" Type="System.String" DbType="Char(3)" CanBeNull="true" />
+      <Column Name="DEVISES_DEVDESC_P" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="DEVISES_DEVDESC_S" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ADRLIV_ALTRANSTAXAB" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="DEVISES_DEVTAUX" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="CODETAXE_CTNTAXE1" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="CODETAXE_CTNTAXE2" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="CODETAXE_CTNTAXE3" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="CODETAXE_CTAXE1" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="CODETAXE_CTAXE2" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="CODETAXE_CTAXE3" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="CODETAXE_CTAXECUMUL" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="CODETAXE_CTCODE" Type="System.String" DbType="VarChar(5)" CanBeNull="true" />
+      <Column Name="COPROJET" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="COEXPORTE" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="COACHETEUR" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="COUSAGER" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="COAUSOIN_DE" Type="System.String" DbType="VarChar(60)" CanBeNull="true" />
+      <Column Name="COTAXE1" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="COTAXE2" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="COTAXE3" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="COMONTANTTAXABLE" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="COSOUSTOTAL" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="CLIENT_CLINDEFINI" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="ADRFAC" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ADRFAC_ALSOINDE" Type="System.String" DbType="VarChar(60)" CanBeNull="true" />
+      <Column Name="ADRFAC_ALNOM" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ADRFAC_ALADR1" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ADRFAC_ALADR2" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ADRFAC_ALADR3" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ADRFAC_ALADR4" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ADRFAC_ALADR5" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ADRFAC_FM_LANGUE" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TERRITOIRE_TTCODE" Type="System.String" DbType="VarChar(3)" CanBeNull="true" />
+      <Column Name="ADRLIV_ALEXTENSION" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="FOURNISSEUR_ADRLIV" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="COTOTALITEM" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="CONOTE_TRANSPORT" Type="System.String" DbType="VarChar(7500)" CanBeNull="true" />
+      <Column Name="CONTACT" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CLIENT_FAC" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CLIENT_FAC_CLCODE" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="CLIENT_FAC_CLNOM" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="COCHEMCOPIEDESS_SE" Type="System.String" DbType="VarChar(255)" CanBeNull="true" />
+      <Column Name="COPRIX_FIXE" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="RAISON" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RAISON_RRCODE" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="RAISON_RRDESC_P" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="RAISON_RRDESC_S" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="CONOCONTRAT" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="COCLOSEDATE" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="ADRFAC_ALFAX" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="ADRFAC_ALTEL" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="ADRFAC_ALEMAIL" Type="System.String" DbType="VarChar(100)" CanBeNull="true" />
+      <Column Name="ADRFAC_ALCONTACT" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="ADRFAC_ALCELLULAIRE" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="ADRFAC_ALTELAUTRE" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="COSEQ_PERE" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="COCOMPTEUR_REVISION" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="COREVNOTRANS" Type="System.String" DbType="Char(10)" CanBeNull="true" />
+      <Column Name="COINFOSUP" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DOCUMENT" Member="DOCUMENTs">
+    <Type Name="DOCUMENT">
+      <Column Name="DOSEQ" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="DONOM_TABLE" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Column Name="DOSEQ_REFERENCE" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DOTYPE_IMPRESSION" Type="System.Byte" DbType="TinyInt NOT NULL" CanBeNull="false" />
+      <Column Name="DOORDRE" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="DODESC_P" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="DODESC_S" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="DOFICHIER" Type="System.String" DbType="VarChar(256)" CanBeNull="true" />
+      <Column Name="DONOTE" Type="System.String" DbType="VarChar(7500)" CanBeNull="true" />
+      <Column Name="DODATE" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="DOUSAGER" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="DOVERSION_NEWS" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="DOBLOB" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="DOIMP_PROC" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>
