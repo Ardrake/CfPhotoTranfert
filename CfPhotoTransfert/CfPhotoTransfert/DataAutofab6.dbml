@@ -136,4 +136,39 @@
       <Column Name="DOIMP_PROC" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.DET_SUIVI_INST" Member="DET_SUIVI_INSTs">
+    <Type Name="DET_SUIVI_INST">
+      <Column Name="DSISEQ" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SUIVI_INST" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="EMPLOYE" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EMPLOYE_EMNO" Type="System.String" DbType="VarChar(5)" CanBeNull="true" />
+      <Column Name="EMPLOYE_EMNOM" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="EMP_FCT" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="EMP_FCT_EFCTCODE" Type="System.String" DbType="VarChar(5)" CanBeNull="true" />
+      <Column Name="EMP_FCT_EFCTDESC_P" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="EMP_FCT_EFCTDESC_S" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="DSICODESPECIAL" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SUIVI_INST" Member="SUIVI_INSTs">
+    <Type Name="SUIVI_INST">
+      <Column Name="SISEQ" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SINOTRANS" Type="System.String" DbType="Char(9) NOT NULL" CanBeNull="false" />
+      <Column Name="SIDATEINSTALLATION" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="SIDATEDERN_MODIF" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="SITEMPSREQUIS" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="SITEMPSREEL" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="SISUIVITAPRESVENTE" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="SINOTE" Type="System.String" DbType="VarChar(7500)" CanBeNull="true" />
+      <Column Name="SIAVECPHOTO" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="SICODEROUTE" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SIROUTEDESC" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="SIREF" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="SICONFORME" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="RAISON" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="RAISON_RRCODE" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="RAISON_RRDESC_P" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="RAISON_RRDESC_S" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+    </Type>
+  </Table>
 </Database>

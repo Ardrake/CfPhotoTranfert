@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Configuration;
 using System.Windows;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows.Media.Imaging;
+using System.Windows.Controls;
 
 namespace CfPhotoTransfert
 {
@@ -18,22 +20,32 @@ namespace CfPhotoTransfert
         public string setting = ConfigurationManager.AppSettings["setting1"];
         public string conn = ConfigurationManager.ConnectionStrings["prod"].ConnectionString;
 
-        List<string> _items = new List<string>(); 
-        List<string> _distinct = new List<string>();
+        public static PhotoInstallations cPhoto = new PhotoInstallations();
 
-        List<string> items = new List<string>();
-        List<string> distinct = new List<string>();
+        DataAutofab6DataContext db = new DataAutofab6DataContext();
+        
+        int sequenceCommande = 0;
+        int newOrdreDocNo = 0;
+
 
         int totalImage = 0;
         string year = DateTime.Today.Year.ToString();
+        bool noProdvalid = false;
+
 
         public MainWindow()
         {
             InitializeComponent();
             totalImageTextBox.Text = totalImage.ToString();
+            this.DataContext = cPhoto;
+            listPhoto.ItemsSource = cPhoto;
+            deleteListItem.IsEnabled = false;
+            transfertImages.IsEnabled = false;
         }
 
-
+        /// <summary>
+        /// Fonctione pour capté les fichier droppé dans la zone prévue
+        /// </summary>
         private void ImagePanel_drop(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
@@ -45,72 +57,51 @@ namespace CfPhotoTransfert
                     if (IsImageExtension(System.IO.Path.GetExtension(item)))
                     {
                         string fname = System.IO.Path.GetFileName(item);
-                        _items.Add(fname);
-                        items.Add(item);
+                        PhotoInstallation oPhoto = new PhotoInstallation(fname, @item);
+                        cPhoto.Add(oPhoto);
+                        
                     }
                     else
                     {
                         MessageBox.Show("Erreur: "+ System.IO.Path.GetFileName(item) + " n'est pas un fichier valide!"); 
                     }
                 }
-
-
-                _distinct = _items.Distinct().ToList();
-                distinct = items.Distinct().ToList();
-
+                updateEcran();
+                deleteListItem.IsEnabled = true;
             }
-            updateEcran();
-            _items = _distinct;
-            items = distinct;
         }
 
-        private void button_Click(object sender, RoutedEventArgs e) // supprimé l'item dans la listbox et liste
+
+        private void button_Click(object sender, RoutedEventArgs e) // supprimé l'item dans la listbox et liste 
         {
+            List<PhotoInstallation> lstitems = new List<PhotoInstallation>();
+
             if (listPhoto.SelectedItem != null)
             {
-                string fSelected = listPhoto.SelectedItem.ToString();
-                foreach (string item in _distinct)
+                foreach(PhotoInstallation item in listPhoto.SelectedItems)
                 {
-                    if (item == fSelected)
-                    {
-                        _distinct.RemoveAll(s => s == item);
-                        break;
-                    }
+                    lstitems.Add(item);
                 }
 
-                foreach (string item in distinct)
-                    if (System.IO.Path.GetFileName(item) == fSelected)
-                    {
-                    distinct.RemoveAll(s => s == item);
-                    break;
-                    }
-
+                foreach (PhotoInstallation item in lstitems)
+                {
+                    cPhoto.Remove(item);
+                }
+                if (cPhoto.Count == 0)
+                {
+                    deleteListItem.IsEnabled = false;
+                }
                 updateEcran();
             }
             else MessageBox.Show("Veuillez selectionnez un item a supprimé");
         }
 
-        private void transfertImages_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Fonction pour effectué la copie des fichiers et inscrire la note dans les document Autofab
+        /// </summary>
+        private void transfertImages_Click(object sender, RoutedEventArgs e) 
         {
-            DataAutofab6DataContext db = new DataAutofab6DataContext();
             string noProdval = noProd.Text;
-            int sequenceCommande = 0;
-            int newOrdreDocNo = 0;
-
-            try
-            {
-                var commandeAutofab = (from c in db.COMMANDEs
-                                       where c.CONOTRANS == noProdval
-                                       select new { c.COSEQ, c.CLIENT_CLNOM }).Single();
-
-                sequenceCommande = commandeAutofab.COSEQ;
-                string nonClienCommande = commandeAutofab.CLIENT_CLNOM;
-                //MessageBox.Show(sequenceCommande.ToString() + "\n" + nonClienCommande);
-            }
-            catch
-            {
-                MessageBox.Show("No. de Commande AutoFAB non valid");
-            }
 
             try
             {
@@ -121,18 +112,17 @@ namespace CfPhotoTransfert
 
                 newOrdreDocNo = ordredocument.DOORDRE + 1;
 
-                //MessageBox.Show("Ordre " + newOrdreDocNo);    
             }
             catch (Exception)
             {
                 newOrdreDocNo = 1; // aucun document dans commande Ordre = 1
             }
 
-            if (distinct.Count > 0 && sequenceCommande != 0)
+            if (cPhoto.Count > 0 && sequenceCommande != 0)
             {
                 bool copyValid = false;
 
-                foreach (var item in distinct)
+                foreach (var item in cPhoto)
                 {
                     
                     string subPath = @"\\cabanons00013\documentsautofab6\documents\COMMANDE\" + year + @"\" + noProdval + @"\"; // \\cabanons00013\documentsautofab6\documents\COMMANDE\2015\CO-000024
@@ -140,13 +130,13 @@ namespace CfPhotoTransfert
 
                     try
                     {
-                        File.Copy(item, subPath + System.IO.Path.GetFileName(item));
+                        File.Copy(item.Photo, subPath + System.IO.Path.GetFileName(item.Name));
 
                         DOCUMENT docNew = new DOCUMENT();
 
                         docNew.DONOM_TABLE = "COMMANDE";
                         docNew.DOSEQ_REFERENCE = sequenceCommande;
-                        docNew.DOFICHIER = subPath + System.IO.Path.GetFileName(item);
+                        docNew.DOFICHIER = subPath + System.IO.Path.GetFileName(item.Name);
                         docNew.DOORDRE = newOrdreDocNo;
                         docNew.DODESC_P = "PHOTO INSTALLATION";
                         docNew.DODESC_S = "PHOTO INSTALLATION";
@@ -162,7 +152,7 @@ namespace CfPhotoTransfert
                     }
                     catch (Exception)
                     {
-                        MessageBox.Show(System.IO.Path.GetFileName(item) + " Fichier déja existant dans le repertoire AutoFAB Image non transféré");
+                        MessageBox.Show(System.IO.Path.GetFileName(item.Name) + " Fichier déja existant dans le repertoire AutoFAB Image non transféré");
                         copyValid = false;
                     }
                 }
@@ -170,10 +160,8 @@ namespace CfPhotoTransfert
                 if (copyValid)
                 {
                     MessageBox.Show("Image Transféré a AutoFAB6");
-                    _items.Clear();
-                    items.Clear();
-                    _distinct.Clear();
-                    distinct.Clear();
+                    // Vide la selection apres le transfert
+                    cPhoto.Clear();
                     noProd.Text = "CO-";
                     updateEcran();
                 }
@@ -184,12 +172,18 @@ namespace CfPhotoTransfert
             }
         }
     
-        private void updateEcran()
+        private void updateEcran() // update le data a l'ecran
         {
-            listPhoto.ItemsSource = null;
-            listPhoto.ItemsSource = _distinct;
+            if (cPhoto.Count > 0 && noProdvalid)
+            {
+                transfertImages.IsEnabled = true;
+            }
+            else
+            {
+                transfertImages.IsEnabled = false;
+            }
 
-            totalImage = _distinct.Count();
+            totalImage = cPhoto.Count();
             totalImageTextBox.Text = totalImage.ToString();
         }
 
@@ -198,35 +192,65 @@ namespace CfPhotoTransfert
             return _validExtensions.Contains(ext);
         }
 
-        private void listPhoto_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
-        {
-            string imagefname = null;
-            foreach (string item in distinct)
-                if (listPhoto.SelectedItem != null)
-                {
-                    if (System.IO.Path.GetFileName(item) == listPhoto.SelectedItem.ToString())
-                    {
-                        imagefname = item;
-                        break;
-                    }
-                    else
-                    {
-                        imagefname = null;
-                    }
-                }
 
-            if (imagefname != null)
+        private void noProd_LostFocus(object sender, RoutedEventArgs e)
+        {
+            string noProdval = noProd.Text;
+            try
             {
-                BitmapImage b = new BitmapImage();
-                b.BeginInit();
-                b.UriSource = new Uri(imagefname);
-                b.EndInit();
-                image.Source = b;
+                var commandeAutofab = (from c in db.COMMANDEs
+                                       where c.CONOTRANS == noProdval
+                                       select new { c.COSEQ, c.CLIENT_CLNOM, c.ADRFAC_ALADR1, c.ADRFAC_ALADR2, c.ADRFAC_ALADR3, c.ADRFAC_ALADR4, c.ADRFAC_ALADR5 }).Single();
+
+                sequenceCommande = commandeAutofab.COSEQ;
+                string nonClienCommande = commandeAutofab.CLIENT_CLNOM;
+                string add1 = commandeAutofab.ADRFAC_ALADR1;
+                string add2 = commandeAutofab.ADRFAC_ALADR2;
+                //string add3 = commandeAutofab.ADRFAC_ALADR3;
+                string add4 = commandeAutofab.ADRFAC_ALADR4;
+                string add5 = commandeAutofab.ADRFAC_ALADR5;
+                labelNomClient.Content = nonClienCommande;
+                addl1.Content = add1;
+                addl2.Content = add2;
+                addl3.Content = add4.ToUpper();
+                noProdvalid = true;
             }
-            else
+            catch
             {
-                image.Source = null;
+                MessageBox.Show("No. de Commande AutoFAB non valid");
+                noProdvalid = false;
+                labelNomClient.Content = null;
+                addl1.Content = null;
+                addl2.Content = null;
+                addl3.Content = null;
             }
+
+            try
+            {
+                var installateurAutofab = (from ds in db.DET_SUIVI_INSTs
+                                           join si in db.SUIVI_INSTs on ds.SUIVI_INST equals si.SISEQ
+                                           where si.SINOTRANS == noProdval
+                                           select new { ds.EMPLOYE_EMNOM }).ToList().Select(x => new { x.EMPLOYE_EMNOM });
+
+                //select EMPLOYE_EMNOM
+                //from suivi_inst
+                //left join DET_SUIVI_INST on SISEQ = SUIVI_INST
+                //where SINOTRANS = 'CO-000024')
+                foreach (object item in installateurAutofab)
+                {
+                    //MessageBox.Show((string)item.ToString());
+                } 
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+
+            updateEcran();
         }
     }
+
 }

@@ -4,24 +4,160 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CfPhotoTransfert"
+        
         mc:Ignorable="d"
-        ResizeMode="NoResize"
-        SizeToContent="WidthAndHeight"
-        Title="Transfert de Photo Installation Cabanons Fontaine" Height="357.415" Width="550  ">
-    <Grid>
-        <StackPanel Name="ImagePanel" Drop="ImagePanel_drop" HorizontalAlignment="Left" Height="240" Margin="223,44,0,0" VerticalAlignment="Top" Width="201" Background="#FFB0ABAB" AllowDrop="True">
-            <ListBox x:Name="listPhoto" Height="240" SelectionChanged="listPhoto_SelectionChanged" />
-        </StackPanel>
-        <Label x:Name="label" Content="Déposé les fichiers ici" Margin="262,8,157,289"/>
-        <Button x:Name="deleteListItem" Content="Supprimé" Margin="447,44,0,0" Click="button_Click" HorizontalAlignment="Left" Width="77" Height="24" VerticalAlignment="Top"/>
-        <TextBox x:Name="noProd" Margin="98,44,331,260" TextWrapping="Wrap" Text="CO-"/>
-        <Label x:Name="label1" Content="No Prod.:" Margin="22,41,449,260"/>
-        <Button x:Name="transfertImages" Content="Transfert" Margin="98,79,0,0" Click="transfertImages_Click" HorizontalAlignment="Left" Width="115" Height="24" VerticalAlignment="Top"/>
-        <TextBox x:Name="totalImageTextBox" Margin="382,289,118,15" TextWrapping="Wrap" Text="" HorizontalContentAlignment="Right" IsReadOnly="True"/>
-        <Label x:Name="label2" Content="Total:" Margin="325,292,157,11"/>
-        <Label x:Name="label3" Content="Prévisualisation &#xD;&#xA;        Image" Margin="65,168,374,108"/>
-        <Border BorderThickness="2" BorderBrush="#FFE0DEDE" Margin="12,112,324,43">
-            <Image x:Name="image" Margin="8"/>
-        </Border>
+        Title="Transfert de Photo Installation Cabanons Fontaine">
+
+    <Window.Resources>
+        <local:PhotoInstallations x:Key="items"/>
+
+        <Style TargetType="Button">
+            <Style.Resources>
+                <Style TargetType="Image">
+                    <Style.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.5" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Style.Resources>
+        </Style>
+
+        <!-- Main photo catalog view -->
+        <Style TargetType="{x:Type ListBox}" x:Key="PhotoListBoxStyle">
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBox}" >
+                        <WrapPanel Margin="5" IsItemsHost="True" Orientation="Horizontal"  
+                           ItemHeight="{Binding ElementName=ZoomSlider, Path='Value'}"  
+                           ItemWidth="{Binding ElementName=ZoomSlider, Path='Value'}"  
+                           VerticalAlignment="Top" HorizontalAlignment="Stretch" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Headers for metadata properties -->
+        <Style x:Key="MetadataHeader" TargetType="{x:Type Label}">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5" >
+                        <LinearGradientBrush.GradientStops>
+                            <GradientStop Offset="0.5" Color="{x:Static SystemColors.AppWorkspaceColor}" />
+                            <GradientStop Offset="2" Color="Transparent" />
+                        </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Foreground" Value="White" />
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+
+
+    </Window.Resources>
+
+    <!-- Master Container -->
+    <Grid Margin="10">
+
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="250" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <GroupBox Grid.Column="0" Grid.Row="0" Grid.RowSpan="2">
+            <StackPanel Background="#FFCCCCCC"  Margin="5,5,5,5" Grid.RowSpan="2" >
+            </StackPanel>
+        </GroupBox>
+
+        <GroupBox Grid.Column="0" Grid.Row="0" Grid.RowSpan="2">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                <StackPanel x:Name="ImagePanel" Drop="ImagePanel_drop" AllowDrop="True" Margin="5,5,5,5" Grid.RowSpan="2" >
+                    <StackPanel.Background>
+                        <ImageBrush ImageSource="LOGO_CF.JPG" Opacity="0.2" Stretch="Uniform"/>
+                    </StackPanel.Background>
+                    <ListBox Name="listPhoto" ItemsSource="{StaticResource items}" Style="{StaticResource PhotoListBoxStyle}" Margin="5" SelectionMode="Extended"  >
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Vertical">
+                                    <Image Margin="3" Source="{Binding Photo}"/>
+                                    <TextBlock Padding="5,0,0,0" Text="{Binding Name, Mode=TwoWay}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </StackPanel>
+            </ScrollViewer>
+        </GroupBox>
+
+
+
+        <!-- Splitter -->
+        <GridSplitter Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Stretch" Width="15" Background="Transparent" ShowsPreview="True"/>
+
+        <!-- Right Hand Panel -->
+        <DockPanel Grid.Row="0" Grid.Column="1" Grid.RowSpan="3" 
+        Margin="15,0,0,0">
+
+            <!-- Zoom Control -->
+            <DockPanel DockPanel.Dock="Bottom" Margin="5">
+                <StackPanel Orientation="Vertical">
+                    <Button x:Name="deleteListItem" Click="button_Click" Width="Auto" BorderThickness="0" BorderBrush="Transparent" Padding="-4">
+                        <Image x:Name="ImageSupprimer" Source="supprimer_rouge.gif"/>
+                    </Button>
+                    <Button x:Name="transfertImages" Click="transfertImages_Click" Width="Auto" BorderThickness="0" BorderBrush="Transparent" Padding="-4">
+                        <Image x:Name="ImageTransfert" Source="Transfert_vert.gif"/>
+                    </Button>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Label x:Name="label2" Content="Total:" />
+                        <TextBox x:Name="totalImageTextBox" TextWrapping="Wrap" Text="" HorizontalContentAlignment="Right" IsReadOnly="True" Width="80"/>
+                    </StackPanel>
+                    <Separator Margin="5"/>
+                    <Separator Margin="5"/>
+                    <StackPanel Orientation="Horizontal">
+                        <Label DockPanel.Dock="Left" Content="Zoom:"/>
+                        <Slider x:Name="ZoomSlider"  
+                          Margin="10,0,0,0"  
+                          Orientation="Horizontal"  
+                          Minimum="80"  
+                          Maximum="320"  
+                          Value="160"  
+                          TickFrequency="80" 
+                          TickPlacement="BottomRight"  
+                          SmallChange="5" 
+                          LargeChange="20" Width="170" />
+                    </StackPanel>
+                </StackPanel>
+            </DockPanel>
+
+            <!-- Metadata Panel -->
+            <GroupBox>
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                    <StackPanel>
+                        <Label Style="{StaticResource MetadataHeader}" Content="Nunéro de Commande" />
+                        <TextBox x:Name="noProd" Text="CO-" Width="Auto" LostFocus="noProd_LostFocus"/>
+                        <Label Style="{StaticResource MetadataHeader}">Non Client</Label>
+                        <Label x:Name="labelNomClient"/>
+                        <Label Style="{StaticResource MetadataHeader}">Addresse</Label>
+                        <Label x:Name="addl1" />
+                        <Label x:Name="addl2" />
+                        <Label x:Name="addl3" />
+                        <Label Style="{StaticResource MetadataHeader}">Installateur</Label>
+                        <Label x:Name="inst1"/>
+                        <Label x:Name="inst2" />
+                    </StackPanel>
+                </ScrollViewer>
+            </GroupBox>
+
+
+
+        </DockPanel>
     </Grid>
+
 </Window>

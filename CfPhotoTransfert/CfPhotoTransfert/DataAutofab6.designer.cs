@@ -36,6 +36,12 @@ namespace CfPhotoTransfert
     partial void InsertDOCUMENT(DOCUMENT instance);
     partial void UpdateDOCUMENT(DOCUMENT instance);
     partial void DeleteDOCUMENT(DOCUMENT instance);
+    partial void InsertDET_SUIVI_INST(DET_SUIVI_INST instance);
+    partial void UpdateDET_SUIVI_INST(DET_SUIVI_INST instance);
+    partial void DeleteDET_SUIVI_INST(DET_SUIVI_INST instance);
+    partial void InsertSUIVI_INST(SUIVI_INST instance);
+    partial void UpdateSUIVI_INST(SUIVI_INST instance);
+    partial void DeleteSUIVI_INST(SUIVI_INST instance);
     #endregion
 		
 		public DataAutofab6DataContext() : 
@@ -81,6 +87,22 @@ namespace CfPhotoTransfert
 			get
 			{
 				return this.GetTable<DOCUMENT>();
+			}
+		}
+		
+		public System.Data.Linq.Table<DET_SUIVI_INST> DET_SUIVI_INSTs
+		{
+			get
+			{
+				return this.GetTable<DET_SUIVI_INST>();
+			}
+		}
+		
+		public System.Data.Linq.Table<SUIVI_INST> SUIVI_INSTs
+		{
+			get
+			{
+				return this.GetTable<SUIVI_INST>();
 			}
 		}
 	}
@@ -3208,6 +3230,730 @@ namespace CfPhotoTransfert
 					this._DOIMP_PROC = value;
 					this.SendPropertyChanged("DOIMP_PROC");
 					this.OnDOIMP_PROCChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.DET_SUIVI_INST")]
+	public partial class DET_SUIVI_INST : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _DSISEQ;
+		
+		private int _SUIVI_INST;
+		
+		private System.Nullable<int> _EMPLOYE;
+		
+		private string _EMPLOYE_EMNO;
+		
+		private string _EMPLOYE_EMNOM;
+		
+		private System.Nullable<int> _EMP_FCT;
+		
+		private string _EMP_FCT_EFCTCODE;
+		
+		private string _EMP_FCT_EFCTDESC_P;
+		
+		private string _EMP_FCT_EFCTDESC_S;
+		
+		private string _DSICODESPECIAL;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnDSISEQChanging(int value);
+    partial void OnDSISEQChanged();
+    partial void OnSUIVI_INSTChanging(int value);
+    partial void OnSUIVI_INSTChanged();
+    partial void OnEMPLOYEChanging(System.Nullable<int> value);
+    partial void OnEMPLOYEChanged();
+    partial void OnEMPLOYE_EMNOChanging(string value);
+    partial void OnEMPLOYE_EMNOChanged();
+    partial void OnEMPLOYE_EMNOMChanging(string value);
+    partial void OnEMPLOYE_EMNOMChanged();
+    partial void OnEMP_FCTChanging(System.Nullable<int> value);
+    partial void OnEMP_FCTChanged();
+    partial void OnEMP_FCT_EFCTCODEChanging(string value);
+    partial void OnEMP_FCT_EFCTCODEChanged();
+    partial void OnEMP_FCT_EFCTDESC_PChanging(string value);
+    partial void OnEMP_FCT_EFCTDESC_PChanged();
+    partial void OnEMP_FCT_EFCTDESC_SChanging(string value);
+    partial void OnEMP_FCT_EFCTDESC_SChanged();
+    partial void OnDSICODESPECIALChanging(string value);
+    partial void OnDSICODESPECIALChanged();
+    #endregion
+		
+		public DET_SUIVI_INST()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DSISEQ", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int DSISEQ
+		{
+			get
+			{
+				return this._DSISEQ;
+			}
+			set
+			{
+				if ((this._DSISEQ != value))
+				{
+					this.OnDSISEQChanging(value);
+					this.SendPropertyChanging();
+					this._DSISEQ = value;
+					this.SendPropertyChanged("DSISEQ");
+					this.OnDSISEQChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SUIVI_INST", DbType="Int NOT NULL")]
+		public int SUIVI_INST
+		{
+			get
+			{
+				return this._SUIVI_INST;
+			}
+			set
+			{
+				if ((this._SUIVI_INST != value))
+				{
+					this.OnSUIVI_INSTChanging(value);
+					this.SendPropertyChanging();
+					this._SUIVI_INST = value;
+					this.SendPropertyChanged("SUIVI_INST");
+					this.OnSUIVI_INSTChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EMPLOYE", DbType="Int")]
+		public System.Nullable<int> EMPLOYE
+		{
+			get
+			{
+				return this._EMPLOYE;
+			}
+			set
+			{
+				if ((this._EMPLOYE != value))
+				{
+					this.OnEMPLOYEChanging(value);
+					this.SendPropertyChanging();
+					this._EMPLOYE = value;
+					this.SendPropertyChanged("EMPLOYE");
+					this.OnEMPLOYEChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EMPLOYE_EMNO", DbType="VarChar(5)")]
+		public string EMPLOYE_EMNO
+		{
+			get
+			{
+				return this._EMPLOYE_EMNO;
+			}
+			set
+			{
+				if ((this._EMPLOYE_EMNO != value))
+				{
+					this.OnEMPLOYE_EMNOChanging(value);
+					this.SendPropertyChanging();
+					this._EMPLOYE_EMNO = value;
+					this.SendPropertyChanged("EMPLOYE_EMNO");
+					this.OnEMPLOYE_EMNOChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EMPLOYE_EMNOM", DbType="VarChar(50)")]
+		public string EMPLOYE_EMNOM
+		{
+			get
+			{
+				return this._EMPLOYE_EMNOM;
+			}
+			set
+			{
+				if ((this._EMPLOYE_EMNOM != value))
+				{
+					this.OnEMPLOYE_EMNOMChanging(value);
+					this.SendPropertyChanging();
+					this._EMPLOYE_EMNOM = value;
+					this.SendPropertyChanged("EMPLOYE_EMNOM");
+					this.OnEMPLOYE_EMNOMChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EMP_FCT", DbType="Int")]
+		public System.Nullable<int> EMP_FCT
+		{
+			get
+			{
+				return this._EMP_FCT;
+			}
+			set
+			{
+				if ((this._EMP_FCT != value))
+				{
+					this.OnEMP_FCTChanging(value);
+					this.SendPropertyChanging();
+					this._EMP_FCT = value;
+					this.SendPropertyChanged("EMP_FCT");
+					this.OnEMP_FCTChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EMP_FCT_EFCTCODE", DbType="VarChar(5)")]
+		public string EMP_FCT_EFCTCODE
+		{
+			get
+			{
+				return this._EMP_FCT_EFCTCODE;
+			}
+			set
+			{
+				if ((this._EMP_FCT_EFCTCODE != value))
+				{
+					this.OnEMP_FCT_EFCTCODEChanging(value);
+					this.SendPropertyChanging();
+					this._EMP_FCT_EFCTCODE = value;
+					this.SendPropertyChanged("EMP_FCT_EFCTCODE");
+					this.OnEMP_FCT_EFCTCODEChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EMP_FCT_EFCTDESC_P", DbType="VarChar(50)")]
+		public string EMP_FCT_EFCTDESC_P
+		{
+			get
+			{
+				return this._EMP_FCT_EFCTDESC_P;
+			}
+			set
+			{
+				if ((this._EMP_FCT_EFCTDESC_P != value))
+				{
+					this.OnEMP_FCT_EFCTDESC_PChanging(value);
+					this.SendPropertyChanging();
+					this._EMP_FCT_EFCTDESC_P = value;
+					this.SendPropertyChanged("EMP_FCT_EFCTDESC_P");
+					this.OnEMP_FCT_EFCTDESC_PChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_EMP_FCT_EFCTDESC_S", DbType="VarChar(50)")]
+		public string EMP_FCT_EFCTDESC_S
+		{
+			get
+			{
+				return this._EMP_FCT_EFCTDESC_S;
+			}
+			set
+			{
+				if ((this._EMP_FCT_EFCTDESC_S != value))
+				{
+					this.OnEMP_FCT_EFCTDESC_SChanging(value);
+					this.SendPropertyChanging();
+					this._EMP_FCT_EFCTDESC_S = value;
+					this.SendPropertyChanged("EMP_FCT_EFCTDESC_S");
+					this.OnEMP_FCT_EFCTDESC_SChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DSICODESPECIAL", DbType="VarChar(50)")]
+		public string DSICODESPECIAL
+		{
+			get
+			{
+				return this._DSICODESPECIAL;
+			}
+			set
+			{
+				if ((this._DSICODESPECIAL != value))
+				{
+					this.OnDSICODESPECIALChanging(value);
+					this.SendPropertyChanging();
+					this._DSICODESPECIAL = value;
+					this.SendPropertyChanged("DSICODESPECIAL");
+					this.OnDSICODESPECIALChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.SUIVI_INST")]
+	public partial class SUIVI_INST : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _SISEQ;
+		
+		private string _SINOTRANS;
+		
+		private System.Nullable<System.DateTime> _SIDATEINSTALLATION;
+		
+		private System.Nullable<System.DateTime> _SIDATEDERN_MODIF;
+		
+		private double _SITEMPSREQUIS;
+		
+		private double _SITEMPSREEL;
+		
+		private bool _SISUIVITAPRESVENTE;
+		
+		private string _SINOTE;
+		
+		private System.Nullable<bool> _SIAVECPHOTO;
+		
+		private int _SICODEROUTE;
+		
+		private string _SIROUTEDESC;
+		
+		private string _SIREF;
+		
+		private bool _SICONFORME;
+		
+		private System.Nullable<int> _RAISON;
+		
+		private string _RAISON_RRCODE;
+		
+		private string _RAISON_RRDESC_P;
+		
+		private string _RAISON_RRDESC_S;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnSISEQChanging(int value);
+    partial void OnSISEQChanged();
+    partial void OnSINOTRANSChanging(string value);
+    partial void OnSINOTRANSChanged();
+    partial void OnSIDATEINSTALLATIONChanging(System.Nullable<System.DateTime> value);
+    partial void OnSIDATEINSTALLATIONChanged();
+    partial void OnSIDATEDERN_MODIFChanging(System.Nullable<System.DateTime> value);
+    partial void OnSIDATEDERN_MODIFChanged();
+    partial void OnSITEMPSREQUISChanging(double value);
+    partial void OnSITEMPSREQUISChanged();
+    partial void OnSITEMPSREELChanging(double value);
+    partial void OnSITEMPSREELChanged();
+    partial void OnSISUIVITAPRESVENTEChanging(bool value);
+    partial void OnSISUIVITAPRESVENTEChanged();
+    partial void OnSINOTEChanging(string value);
+    partial void OnSINOTEChanged();
+    partial void OnSIAVECPHOTOChanging(System.Nullable<bool> value);
+    partial void OnSIAVECPHOTOChanged();
+    partial void OnSICODEROUTEChanging(int value);
+    partial void OnSICODEROUTEChanged();
+    partial void OnSIROUTEDESCChanging(string value);
+    partial void OnSIROUTEDESCChanged();
+    partial void OnSIREFChanging(string value);
+    partial void OnSIREFChanged();
+    partial void OnSICONFORMEChanging(bool value);
+    partial void OnSICONFORMEChanged();
+    partial void OnRAISONChanging(System.Nullable<int> value);
+    partial void OnRAISONChanged();
+    partial void OnRAISON_RRCODEChanging(string value);
+    partial void OnRAISON_RRCODEChanged();
+    partial void OnRAISON_RRDESC_PChanging(string value);
+    partial void OnRAISON_RRDESC_PChanged();
+    partial void OnRAISON_RRDESC_SChanging(string value);
+    partial void OnRAISON_RRDESC_SChanged();
+    #endregion
+		
+		public SUIVI_INST()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SISEQ", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int SISEQ
+		{
+			get
+			{
+				return this._SISEQ;
+			}
+			set
+			{
+				if ((this._SISEQ != value))
+				{
+					this.OnSISEQChanging(value);
+					this.SendPropertyChanging();
+					this._SISEQ = value;
+					this.SendPropertyChanged("SISEQ");
+					this.OnSISEQChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SINOTRANS", DbType="Char(9) NOT NULL", CanBeNull=false)]
+		public string SINOTRANS
+		{
+			get
+			{
+				return this._SINOTRANS;
+			}
+			set
+			{
+				if ((this._SINOTRANS != value))
+				{
+					this.OnSINOTRANSChanging(value);
+					this.SendPropertyChanging();
+					this._SINOTRANS = value;
+					this.SendPropertyChanged("SINOTRANS");
+					this.OnSINOTRANSChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SIDATEINSTALLATION", DbType="DateTime")]
+		public System.Nullable<System.DateTime> SIDATEINSTALLATION
+		{
+			get
+			{
+				return this._SIDATEINSTALLATION;
+			}
+			set
+			{
+				if ((this._SIDATEINSTALLATION != value))
+				{
+					this.OnSIDATEINSTALLATIONChanging(value);
+					this.SendPropertyChanging();
+					this._SIDATEINSTALLATION = value;
+					this.SendPropertyChanged("SIDATEINSTALLATION");
+					this.OnSIDATEINSTALLATIONChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SIDATEDERN_MODIF", DbType="DateTime")]
+		public System.Nullable<System.DateTime> SIDATEDERN_MODIF
+		{
+			get
+			{
+				return this._SIDATEDERN_MODIF;
+			}
+			set
+			{
+				if ((this._SIDATEDERN_MODIF != value))
+				{
+					this.OnSIDATEDERN_MODIFChanging(value);
+					this.SendPropertyChanging();
+					this._SIDATEDERN_MODIF = value;
+					this.SendPropertyChanged("SIDATEDERN_MODIF");
+					this.OnSIDATEDERN_MODIFChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SITEMPSREQUIS", DbType="Float NOT NULL")]
+		public double SITEMPSREQUIS
+		{
+			get
+			{
+				return this._SITEMPSREQUIS;
+			}
+			set
+			{
+				if ((this._SITEMPSREQUIS != value))
+				{
+					this.OnSITEMPSREQUISChanging(value);
+					this.SendPropertyChanging();
+					this._SITEMPSREQUIS = value;
+					this.SendPropertyChanged("SITEMPSREQUIS");
+					this.OnSITEMPSREQUISChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SITEMPSREEL", DbType="Float NOT NULL")]
+		public double SITEMPSREEL
+		{
+			get
+			{
+				return this._SITEMPSREEL;
+			}
+			set
+			{
+				if ((this._SITEMPSREEL != value))
+				{
+					this.OnSITEMPSREELChanging(value);
+					this.SendPropertyChanging();
+					this._SITEMPSREEL = value;
+					this.SendPropertyChanged("SITEMPSREEL");
+					this.OnSITEMPSREELChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SISUIVITAPRESVENTE", DbType="Bit NOT NULL")]
+		public bool SISUIVITAPRESVENTE
+		{
+			get
+			{
+				return this._SISUIVITAPRESVENTE;
+			}
+			set
+			{
+				if ((this._SISUIVITAPRESVENTE != value))
+				{
+					this.OnSISUIVITAPRESVENTEChanging(value);
+					this.SendPropertyChanging();
+					this._SISUIVITAPRESVENTE = value;
+					this.SendPropertyChanged("SISUIVITAPRESVENTE");
+					this.OnSISUIVITAPRESVENTEChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SINOTE", DbType="VarChar(7500)")]
+		public string SINOTE
+		{
+			get
+			{
+				return this._SINOTE;
+			}
+			set
+			{
+				if ((this._SINOTE != value))
+				{
+					this.OnSINOTEChanging(value);
+					this.SendPropertyChanging();
+					this._SINOTE = value;
+					this.SendPropertyChanged("SINOTE");
+					this.OnSINOTEChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SIAVECPHOTO", DbType="Bit")]
+		public System.Nullable<bool> SIAVECPHOTO
+		{
+			get
+			{
+				return this._SIAVECPHOTO;
+			}
+			set
+			{
+				if ((this._SIAVECPHOTO != value))
+				{
+					this.OnSIAVECPHOTOChanging(value);
+					this.SendPropertyChanging();
+					this._SIAVECPHOTO = value;
+					this.SendPropertyChanged("SIAVECPHOTO");
+					this.OnSIAVECPHOTOChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SICODEROUTE", DbType="Int NOT NULL")]
+		public int SICODEROUTE
+		{
+			get
+			{
+				return this._SICODEROUTE;
+			}
+			set
+			{
+				if ((this._SICODEROUTE != value))
+				{
+					this.OnSICODEROUTEChanging(value);
+					this.SendPropertyChanging();
+					this._SICODEROUTE = value;
+					this.SendPropertyChanged("SICODEROUTE");
+					this.OnSICODEROUTEChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SIROUTEDESC", DbType="VarChar(50)")]
+		public string SIROUTEDESC
+		{
+			get
+			{
+				return this._SIROUTEDESC;
+			}
+			set
+			{
+				if ((this._SIROUTEDESC != value))
+				{
+					this.OnSIROUTEDESCChanging(value);
+					this.SendPropertyChanging();
+					this._SIROUTEDESC = value;
+					this.SendPropertyChanged("SIROUTEDESC");
+					this.OnSIROUTEDESCChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SIREF", DbType="VarChar(50)")]
+		public string SIREF
+		{
+			get
+			{
+				return this._SIREF;
+			}
+			set
+			{
+				if ((this._SIREF != value))
+				{
+					this.OnSIREFChanging(value);
+					this.SendPropertyChanging();
+					this._SIREF = value;
+					this.SendPropertyChanged("SIREF");
+					this.OnSIREFChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_SICONFORME", DbType="Bit NOT NULL")]
+		public bool SICONFORME
+		{
+			get
+			{
+				return this._SICONFORME;
+			}
+			set
+			{
+				if ((this._SICONFORME != value))
+				{
+					this.OnSICONFORMEChanging(value);
+					this.SendPropertyChanging();
+					this._SICONFORME = value;
+					this.SendPropertyChanged("SICONFORME");
+					this.OnSICONFORMEChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RAISON", DbType="Int")]
+		public System.Nullable<int> RAISON
+		{
+			get
+			{
+				return this._RAISON;
+			}
+			set
+			{
+				if ((this._RAISON != value))
+				{
+					this.OnRAISONChanging(value);
+					this.SendPropertyChanging();
+					this._RAISON = value;
+					this.SendPropertyChanged("RAISON");
+					this.OnRAISONChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RAISON_RRCODE", DbType="VarChar(20)")]
+		public string RAISON_RRCODE
+		{
+			get
+			{
+				return this._RAISON_RRCODE;
+			}
+			set
+			{
+				if ((this._RAISON_RRCODE != value))
+				{
+					this.OnRAISON_RRCODEChanging(value);
+					this.SendPropertyChanging();
+					this._RAISON_RRCODE = value;
+					this.SendPropertyChanged("RAISON_RRCODE");
+					this.OnRAISON_RRCODEChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RAISON_RRDESC_P", DbType="VarChar(50)")]
+		public string RAISON_RRDESC_P
+		{
+			get
+			{
+				return this._RAISON_RRDESC_P;
+			}
+			set
+			{
+				if ((this._RAISON_RRDESC_P != value))
+				{
+					this.OnRAISON_RRDESC_PChanging(value);
+					this.SendPropertyChanging();
+					this._RAISON_RRDESC_P = value;
+					this.SendPropertyChanged("RAISON_RRDESC_P");
+					this.OnRAISON_RRDESC_PChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_RAISON_RRDESC_S", DbType="VarChar(50)")]
+		public string RAISON_RRDESC_S
+		{
+			get
+			{
+				return this._RAISON_RRDESC_S;
+			}
+			set
+			{
+				if ((this._RAISON_RRDESC_S != value))
+				{
+					this.OnRAISON_RRDESC_SChanging(value);
+					this.SendPropertyChanging();
+					this._RAISON_RRDESC_S = value;
+					this.SendPropertyChanged("RAISON_RRDESC_S");
+					this.OnRAISON_RRDESC_SChanged();
 				}
 			}
 		}

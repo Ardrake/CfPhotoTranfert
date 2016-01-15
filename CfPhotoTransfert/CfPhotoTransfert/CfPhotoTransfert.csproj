@@ -29,7 +29,7 @@
     <ProductName>CF Photo Transfert</ProductName>
     <PublisherName>Cabanons Fontaine Inc.</PublisherName>
     <SuiteName>CF Utilitaire</SuiteName>
-    <ApplicationRevision>6</ApplicationRevision>
+    <ApplicationRevision>8</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -112,6 +112,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PhotoInstallation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -166,6 +167,21 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="12853_noyc9f_2rS_8.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="LOGO_CF.JPG" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Transfert_vert.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Transfert_gris.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="supprimer_gris.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="supprimer_rouge.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
