@@ -149,8 +149,7 @@
                         <Label x:Name="addl2" />
                         <Label x:Name="addl3" />
                         <Label Style="{StaticResource MetadataHeader}">Installateur</Label>
-                        <Label x:Name="inst1"/>
-                        <Label x:Name="inst2" />
+                        <ListBox x:Name="installateur"/>
                     </StackPanel>
                 </ScrollViewer>
             </GroupBox>

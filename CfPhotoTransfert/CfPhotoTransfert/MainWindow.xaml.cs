@@ -58,8 +58,17 @@ namespace CfPhotoTransfert
                     {
                         string fname = System.IO.Path.GetFileName(item);
                         PhotoInstallation oPhoto = new PhotoInstallation(fname, @item);
-                        cPhoto.Add(oPhoto);
-                        
+
+                        var findObject = cPhoto.Any(p => p.Photo == item);
+                        if (!findObject)
+                        {
+                            cPhoto.Add(oPhoto);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Fichier: " + item + " déja existant");
+                        }
+
                     }
                     else
                     {
@@ -163,6 +172,11 @@ namespace CfPhotoTransfert
                     // Vide la selection apres le transfert
                     cPhoto.Clear();
                     noProd.Text = "CO-";
+                    labelNomClient.Content = null;
+                    addl1.Content = null;
+                    addl2.Content = null;
+                    addl3.Content = null;
+                    installateur.Items.Clear();
                     updateEcran();
                 }
             }
@@ -193,20 +207,20 @@ namespace CfPhotoTransfert
         }
 
 
-        private void noProd_LostFocus(object sender, RoutedEventArgs e)
+        private void noProd_LostFocus(object sender, RoutedEventArgs e) // Load data commande et installateur
         {
             string noProdval = noProd.Text;
+            installateur.Items.Clear();
             try
             {
                 var commandeAutofab = (from c in db.COMMANDEs
                                        where c.CONOTRANS == noProdval
-                                       select new { c.COSEQ, c.CLIENT_CLNOM, c.ADRFAC_ALADR1, c.ADRFAC_ALADR2, c.ADRFAC_ALADR3, c.ADRFAC_ALADR4, c.ADRFAC_ALADR5 }).Single();
+                                       select new { c.COSEQ, c.CLIENT_CLNOM, c.ADRFAC_ALADR1, c.ADRFAC_ALADR2, c.ADRFAC_ALADR4, c.ADRFAC_ALADR5 }).Single();
 
                 sequenceCommande = commandeAutofab.COSEQ;
                 string nonClienCommande = commandeAutofab.CLIENT_CLNOM;
                 string add1 = commandeAutofab.ADRFAC_ALADR1;
                 string add2 = commandeAutofab.ADRFAC_ALADR2;
-                //string add3 = commandeAutofab.ADRFAC_ALADR3;
                 string add4 = commandeAutofab.ADRFAC_ALADR4;
                 string add5 = commandeAutofab.ADRFAC_ALADR5;
                 labelNomClient.Content = nonClienCommande;
@@ -227,19 +241,21 @@ namespace CfPhotoTransfert
 
             try
             {
-                var installateurAutofab = (from ds in db.DET_SUIVI_INSTs
-                                           join si in db.SUIVI_INSTs on ds.SUIVI_INST equals si.SISEQ
-                                           where si.SINOTRANS == noProdval
-                                           select new { ds.EMPLOYE_EMNOM }).ToList().Select(x => new { x.EMPLOYE_EMNOM });
+                var AutofabInstallateur = (from ds in db.DET_SUIVI_INSTs
+                                                    join si in db.SUIVI_INSTs on ds.SUIVI_INST equals si.SISEQ
+                                                    where si.SINOTRANS == noProdval
+                                                    select new { ds.EMPLOYE_EMNOM }).ToList();
 
-                //select EMPLOYE_EMNOM
-                //from suivi_inst
-                //left join DET_SUIVI_INST on SISEQ = SUIVI_INST
-                //where SINOTRANS = 'CO-000024')
-                foreach (object item in installateurAutofab)
+
+
+
+                foreach (var item in AutofabInstallateur)
                 {
-                    //MessageBox.Show((string)item.ToString());
-                } 
+                    string iName = item.EMPLOYE_EMNOM;
+                    installateur.Items.Add(iName);
+                }
+                
+
 
             }
             catch (Exception)
