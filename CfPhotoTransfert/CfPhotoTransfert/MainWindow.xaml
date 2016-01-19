@@ -59,8 +59,7 @@
 
     <!-- Master Container -->
     <Grid Margin="10">
-
-
+        
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="250" />
@@ -78,7 +77,7 @@
 
         <GroupBox Grid.Column="0" Grid.Row="0" Grid.RowSpan="2">
             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-                <StackPanel x:Name="ImagePanel" Drop="ImagePanel_drop" AllowDrop="True" Margin="5,5,5,5" Grid.RowSpan="2" >
+                <StackPanel x:Name="ImagePanel" Drop="ImagePanel_drop" AllowDrop="True"  Margin="5,5,5,5" Grid.RowSpan="2" >
                     <StackPanel.Background>
                         <ImageBrush ImageSource="LOGO_CF.JPG" Opacity="0.2" Stretch="Uniform"/>
                     </StackPanel.Background>

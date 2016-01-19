@@ -3,19 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Configuration;
 using System.Windows;
-using System.Collections.ObjectModel;
 using System.IO;
-using System.Windows.Media.Imaging;
-using System.Windows.Controls;
 
 namespace CfPhotoTransfert
 {
-    /// <summary>
+
     /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
-        private static readonly string[] _validExtensions = { ".jpg", ".bmp", ".gif", ".png" };
+        private static readonly string[] _validExtensions = { ".jpg", ".JPG", ".bmp", ".BMP", ".gif", ".GIF", ".png", ".PNG" };
 
         public string setting = ConfigurationManager.AppSettings["setting1"];
         public string conn = ConfigurationManager.ConnectionStrings["prod"].ConnectionString;
@@ -43,9 +39,8 @@ namespace CfPhotoTransfert
             transfertImages.IsEnabled = false;
         }
 
-        /// <summary>
+
         /// Fonctione pour capté les fichier droppé dans la zone prévue
-        /// </summary>
         private void ImagePanel_drop(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
@@ -68,7 +63,6 @@ namespace CfPhotoTransfert
                         {
                             MessageBox.Show("Fichier: " + item + " déja existant");
                         }
-
                     }
                     else
                     {
@@ -81,7 +75,8 @@ namespace CfPhotoTransfert
         }
 
 
-        private void button_Click(object sender, RoutedEventArgs e) // supprimé l'item dans la listbox et liste 
+        /// supprimé l'item dans la listbox et liste 
+        private void button_Click(object sender, RoutedEventArgs e) 
         {
             List<PhotoInstallation> lstitems = new List<PhotoInstallation>();
 
@@ -105,9 +100,8 @@ namespace CfPhotoTransfert
             else MessageBox.Show("Veuillez selectionnez un item a supprimé");
         }
 
-        /// <summary>
+
         /// Fonction pour effectué la copie des fichiers et inscrire la note dans les document Autofab
-        /// </summary>
         private void transfertImages_Click(object sender, RoutedEventArgs e) 
         {
             string noProdval = noProd.Text;
@@ -120,7 +114,6 @@ namespace CfPhotoTransfert
                                      select new { d.DOORDRE }).FirstOrDefault();
 
                 newOrdreDocNo = ordredocument.DOORDRE + 1;
-
             }
             catch (Exception)
             {
@@ -185,8 +178,10 @@ namespace CfPhotoTransfert
                 MessageBox.Show("Aucune image transféré");
             }
         }
-    
-        private void updateEcran() // update le data a l'ecran
+
+
+        /// update le data a l'ecran
+        private void updateEcran() 
         {
             if (cPhoto.Count > 0 && noProdvalid)
             {
@@ -207,7 +202,8 @@ namespace CfPhotoTransfert
         }
 
 
-        private void noProd_LostFocus(object sender, RoutedEventArgs e) // Load data commande et installateur
+        ///  Load data commande et installateur
+        private void noProd_LostFocus(object sender, RoutedEventArgs e) 
         {
             string noProdval = noProd.Text;
             installateur.Items.Clear();
@@ -246,27 +242,17 @@ namespace CfPhotoTransfert
                                                     where si.SINOTRANS == noProdval
                                                     select new { ds.EMPLOYE_EMNOM }).ToList();
 
-
-
-
                 foreach (var item in AutofabInstallateur)
                 {
                     string iName = item.EMPLOYE_EMNOM;
                     installateur.Items.Add(iName);
                 }
-                
-
-
             }
             catch (Exception)
             {
-
                 throw;
             }
-
-
             updateEcran();
         }
     }
-
 }
