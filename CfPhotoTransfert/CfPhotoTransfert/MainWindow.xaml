@@ -140,7 +140,10 @@
                 <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
                     <StackPanel>
                         <Label Style="{StaticResource MetadataHeader}" Content="Nunéro de Commande" />
-                        <TextBox x:Name="noProd" Text="CO-" Width="Auto" LostFocus="noProd_LostFocus"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="CO-" />
+                            <TextBox x:Name="noProd" Width="Auto" MinWidth="100" LostFocus="noProd_LostFocus"/>
+                        </StackPanel>
                         <Label Style="{StaticResource MetadataHeader}">Non Client</Label>
                         <Label x:Name="labelNomClient"/>
                         <Label Style="{StaticResource MetadataHeader}">Addresse</Label>

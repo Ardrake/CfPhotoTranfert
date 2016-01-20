@@ -12,17 +12,11 @@ namespace CfPhotoTransfert
     public partial class MainWindow : Window
     {
         private static readonly string[] _validExtensions = { ".jpg", ".JPG", ".bmp", ".BMP", ".gif", ".GIF", ".png", ".PNG" };
-
-        public string setting = ConfigurationManager.AppSettings["setting1"];
-        public string conn = ConfigurationManager.ConnectionStrings["prod"].ConnectionString;
-
         public static PhotoInstallations cPhoto = new PhotoInstallations();
-
         DataAutofab6DataContext db = new DataAutofab6DataContext();
         
         int sequenceCommande = 0;
         int newOrdreDocNo = 0;
-
 
         int totalImage = 0;
         string year = DateTime.Today.Year.ToString();
@@ -104,7 +98,7 @@ namespace CfPhotoTransfert
         /// Fonction pour effectué la copie des fichiers et inscrire la note dans les document Autofab
         private void transfertImages_Click(object sender, RoutedEventArgs e) 
         {
-            string noProdval = noProd.Text;
+            string noProdval = "CO-" + noProd.Text;
 
             try
             {
@@ -164,7 +158,7 @@ namespace CfPhotoTransfert
                     MessageBox.Show("Image Transféré a AutoFAB6");
                     // Vide la selection apres le transfert
                     cPhoto.Clear();
-                    noProd.Text = "CO-";
+                    noProd.Text = "";
                     labelNomClient.Content = null;
                     addl1.Content = null;
                     addl2.Content = null;
@@ -205,54 +199,57 @@ namespace CfPhotoTransfert
         ///  Load data commande et installateur
         private void noProd_LostFocus(object sender, RoutedEventArgs e) 
         {
-            string noProdval = noProd.Text;
-            installateur.Items.Clear();
-            try
+            if (noProd.Text != "")
             {
-                var commandeAutofab = (from c in db.COMMANDEs
-                                       where c.CONOTRANS == noProdval
-                                       select new { c.COSEQ, c.CLIENT_CLNOM, c.ADRFAC_ALADR1, c.ADRFAC_ALADR2, c.ADRFAC_ALADR4, c.ADRFAC_ALADR5 }).Single();
-
-                sequenceCommande = commandeAutofab.COSEQ;
-                string nonClienCommande = commandeAutofab.CLIENT_CLNOM;
-                string add1 = commandeAutofab.ADRFAC_ALADR1;
-                string add2 = commandeAutofab.ADRFAC_ALADR2;
-                string add4 = commandeAutofab.ADRFAC_ALADR4;
-                string add5 = commandeAutofab.ADRFAC_ALADR5;
-                labelNomClient.Content = nonClienCommande;
-                addl1.Content = add1;
-                addl2.Content = add2;
-                addl3.Content = add4.ToUpper();
-                noProdvalid = true;
-            }
-            catch
-            {
-                MessageBox.Show("No. de Commande AutoFAB non valid");
-                noProdvalid = false;
-                labelNomClient.Content = null;
-                addl1.Content = null;
-                addl2.Content = null;
-                addl3.Content = null;
-            }
-
-            try
-            {
-                var AutofabInstallateur = (from ds in db.DET_SUIVI_INSTs
-                                                    join si in db.SUIVI_INSTs on ds.SUIVI_INST equals si.SISEQ
-                                                    where si.SINOTRANS == noProdval
-                                                    select new { ds.EMPLOYE_EMNOM }).ToList();
-
-                foreach (var item in AutofabInstallateur)
+                string noProdval = "CO-" + noProd.Text;
+                installateur.Items.Clear();
+                try
                 {
-                    string iName = item.EMPLOYE_EMNOM;
-                    installateur.Items.Add(iName);
+                    var commandeAutofab = (from c in db.COMMANDEs
+                                           where c.CONOTRANS == noProdval
+                                           select new { c.COSEQ, c.CLIENT_CLNOM, c.ADRFAC_ALADR1, c.ADRFAC_ALADR2, c.ADRFAC_ALADR4, c.ADRFAC_ALADR5 }).Single();
+
+                    sequenceCommande = commandeAutofab.COSEQ;
+                    string nonClienCommande = commandeAutofab.CLIENT_CLNOM;
+                    string add1 = commandeAutofab.ADRFAC_ALADR1;
+                    string add2 = commandeAutofab.ADRFAC_ALADR2;
+                    string add4 = commandeAutofab.ADRFAC_ALADR4;
+                    string add5 = commandeAutofab.ADRFAC_ALADR5;
+                    labelNomClient.Content = nonClienCommande;
+                    addl1.Content = add1;
+                    addl2.Content = add2;
+                    addl3.Content = add4.ToUpper();
+                    noProdvalid = true;
                 }
+                catch
+                {
+                    MessageBox.Show("No. de Commande AutoFAB non valid");
+                    noProdvalid = false;
+                    labelNomClient.Content = null;
+                    addl1.Content = null;
+                    addl2.Content = null;
+                    addl3.Content = null;
+                }
+
+                try
+                {
+                    var AutofabInstallateur = (from ds in db.DET_SUIVI_INSTs
+                                               join si in db.SUIVI_INSTs on ds.SUIVI_INST equals si.SISEQ
+                                               where si.SINOTRANS == noProdval
+                                               select new { ds.EMPLOYE_EMNOM }).ToList();
+
+                    foreach (var item in AutofabInstallateur)
+                    {
+                        string iName = item.EMPLOYE_EMNOM;
+                        installateur.Items.Add(iName);
+                    }
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+                updateEcran();
             }
-            catch (Exception)
-            {
-                throw;
-            }
-            updateEcran();
         }
     }
 }
