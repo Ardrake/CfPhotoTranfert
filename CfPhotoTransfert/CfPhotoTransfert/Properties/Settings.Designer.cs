@@ -26,7 +26,7 @@ namespace CfPhotoTransfert.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=CABANONS00006V;Initial Catalog=Autofab;User ID=Python;Password=pyt123" +
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=CABANONS00006V;Initial Catalog=Autofab;User ID=XXXXX;Password=*****" +
             "")]
         public string AutofabConnectionString {
             get {
